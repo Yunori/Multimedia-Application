@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Animation">
+  <meta name="author" content="Bertocco Thomas-Killian">
+
+  <title>Animation</title>
+
+  <link href="style.css" rel="stylesheet">
+
+  <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body class="site">
+  <canvas id="canvas"></canvas>
+  <div class="container">
+    <div class="row">
+      <div class="column">
+        <p>[Multiply pts value X]</p>
+        <input type="text" id="multx" value="1" placeholder="Default: 1">
+      </div>
+      <div class="column">
+        <p>[Multiply pts value Y]</p>
+        <input type="text" id="multy" value="2" placeholder="Default: 2">
+      </div>
+      <div class="column">
+        <p>[Scale Canvas X]</p>
+        <input type="text" id="scalex" value="1" placeholder="Default: 1">
+      </div>
+      <div class="column">
+        <p>[Scale Canvas Y]</p>
+        <input type="text" id="scaley" value="1" placeholder="Default: 1">
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <input type="button" id="apply" value="Apply">
+      </div>
+    </div>
+    <script src="canvas.js"></script>
+  </div>
+</body>
+
+</html>
