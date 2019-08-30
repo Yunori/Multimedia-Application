@@ -3,6 +3,7 @@ window.onload = function() {
   var height, width;
   var dots = [];
   var originalCoordinates = [1, 8, 6, 8, 7, 7, 8, 7, 9, 6, 17, 6, 18, 7, 19, 7, 20, 8, 25, 8, 25, 10, 24, 11, 24, 12, 22, 14, 22, 17, 21, 18, 21, 19, 19, 21, 23, 25, 23, 26, 24, 27, 24, 33, 22, 35, 14, 35, 13, 34, 12, 35, 11, 35, 10, 34, 10, 32, 9, 31, 9, 28, 8, 27, 8, 23, 9, 22, 8, 21, 7, 21, 5, 19, 5, 18, 4, 17, 4, 14, 2, 12, 2, 11, 1, 10, 1, 8];
+  var coordinates = [];
   var anim;
   var drawInterval;
   var direction = 0
@@ -41,8 +42,8 @@ window.onload = function() {
   function initDots() {
     dots = [];
     var id = 0;
-    for (id = 0; id <= originalCoordinates.length - 1; id = id + 2) {
-      var dot = new Dot(originalCoordinates[id], originalCoordinates[id + 1]);
+    for (id = 0; id <= coordinates.length - 1; id = id + 2) {
+      var dot = new Dot(coordinates[id], coordinates[id + 1]);
       dots.push(dot);
     }
   }
@@ -57,7 +58,7 @@ window.onload = function() {
     }
 
     function moveDots() {
-      initCanvas()
+      initCanvas();
       for (var z = 0; z < dots.length; z++) {
         dots[z].x = dots[z].x + Math.cos(dots[z].direction) * dots[z].speed;
         dots[z].y = dots[z].y + Math.sin(dots[z].direction) * dots[z].speed;
@@ -105,7 +106,7 @@ window.onload = function() {
     settings.multY = isNumeric(document.getElementById('multy').value) ? document.getElementById('multy').value : 2;
     settings.scaleX = isNumeric(document.getElementById('scalex').value) ? document.getElementById('scalex').value : 1;
     settings.scaleY = isNumeric(document.getElementById('scaley').value) ? document.getElementById('scaley').value : 1;
-    originalCoordinates = originalCoordinates.map(function(value, index) {
+    coordinates = coordinates.map(function(value, index) {
       if (index % 2 === 1) {
         settings.minY = settings.minY > value ? value : settings.minY;
         settings.maxY = settings.maxY < value ? value : settings.maxY;
@@ -118,6 +119,10 @@ window.onload = function() {
     })
   }
 
+  function clearCanvas() {
+    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+  }
+
   function initCanvas() {
     //height = canvas.clientHeight;
     //width = canvas.clientWidth;
@@ -127,7 +132,7 @@ window.onload = function() {
     width = 1920;
     context.canvas.width = 1920;
     context.canvas.height = 1080;
-    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+    clearCanvas();
     context.font = "30px Arial";
     context.fillText("Responsive kitty", context.canvas.width/2.30, context.canvas.height/10);
     context.translate((context.canvas.width - (pxWidth(settings.maxX) - pxWidth(settings.minX))*settings.multX*settings.scaleX)/2 - pxWidth(settings.minX)*settings.multX*settings.scaleX, (context.canvas.height - (pxHeight(settings.maxY) - pxHeight(settings.minY))*settings.multY*settings.scaleY)/2 - pxHeight(settings.minY)*settings.multY*settings.scaleY);
@@ -139,6 +144,7 @@ window.onload = function() {
   appbtn.addEventListener('click', init);
 
   function init() {
+	coordinates = originalCoordinates;
     window.clearInterval(drawInterval);
     cancelAnimationFrame(anim);
     applySettings();
